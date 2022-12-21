@@ -23,8 +23,11 @@ class StoreUpdateCourse extends FormRequest
      */
     public function rules()
     {
+        // uuid passado na url
+        $uuid = $this->course ?? '';
+
         return [
-            'name' => ['required', 'min:3', 'max:255', 'unique:courses'],
+            'name' => ['required', 'min:3', 'max:255', "unique:courses,name,{$uuid},uuid"], // é unico na coluna 'name' e passa o uuid para saber a coluna que está comparando
             'description' => ['nullable', 'min:3', 'max:9999']
         ];
     }
